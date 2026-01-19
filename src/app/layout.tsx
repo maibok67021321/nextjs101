@@ -3,6 +3,7 @@ import { Prompt } from 'next/font/google' //
 import Link from 'next/link'
 import './globals.css'
 import { Separator } from "@/components/ui/separator"
+import AppQueryProvider from './providers'  // ← เพิ่มบรรทัดนี้
 
 // *** ส่วนที่ 1: การจัดการ Fonts (Google Fonts Optimization) ***
 //
@@ -56,36 +57,52 @@ export default function RootLayout({
   return (
     // การนำฟอนต์ไปใช้ในระดับ html และ body
     <html lang="th" className={prompt.variable}>
-      <body className={`${prompt.className} antialiased min-h-screen bg-white`}>
-        {/* Navigation Bar พร้อมดีไซน์ Sticky และ Blur */}
-        <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-          <div className="container mx-auto flex h-16 items-center px-4">
-            <Link href="/" className="flex items-center space-x-2 mr-8">
-              <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                NextApp
-              </span>
-            </Link>
-            
-            <nav className="flex flex-1 items-center space-x-4 text-sm font-medium text-slate-600">
-              <Link href="/" className="hover:text-slate-900 transition-colors">
-                หน้าหลัก
-              </Link>
-              <Separator orientation="vertical" className="h-4" /> {/* เส้นคั่นแนวตั้ง */}
-              <Link href="/about" className="hover:text-slate-900 transition-colors">
-                เกี่ยวกับเรา
-              </Link>
-              <Separator orientation="vertical" className="h-4" />
-              <Link href="/products" className="hover:text-slate-900 transition-colors">
-                สินค้า
-              </Link>
-            </nav>
-          </div>
-        </header>
-        
-        {/* ส่วนเนื้อหาหลัก จัดกึ่งกลางด้วย container */}
-        <main className="container mx-auto px-4 py-8">
+      <body className={prompt.className}>
+        <AppQueryProvider>  {/* ← ห่อ children ด้วย Provider */}
+          <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/60">
+            <div className="container mx-auto flex h-16 items-center px-4">
+              <Link
+                href="/"
+                className="flex items-center space-x-2 mr-8"
+                >
+                  <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                    NextApp
+                  </span>
+                </Link>
+
+                <nav className="flex flex-1 items-center space-x-6 text-sm font-medium">
+                  <Link
+                    href="/"
+                    className="text-slate-600 hover:text-slate-900 transition-colors"
+                  >
+                    หน้าหลัก
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="text-slate-600 hover:text-slate-900 transition-colors"
+                  >
+                    เกี่ยวกับเรา
+                  </Link>
+                  <Link
+                    href="/products"
+                    className="text-slate-600 hover:text-slate-900 transition-colors"
+                  >
+                    สินค้า
+                  </Link>
+                  <Link
+                    href="/orders"
+                    className="text-slate-600 hover:text-slate-900 transition-colors"
+                  >
+                    รายงานคำสั่งซื้อ
+                  </Link>
+                  
+                </nav>
+            </div>
+          </header>
+          
           {children}
-        </main>
+          
+        </AppQueryProvider>
       </body>
     </html>
   )
