@@ -1,6 +1,6 @@
-# 📘 บทที่ 6 การดึงข้อมูล (Fetching Data)
+# 📘 บทที่ 7 การจัดการ Cache ด้วย Cache Components
 
-คุณกำลังอยู่ที่ Branch **`chapter-06`** ซึ่งเน้นการการดึงข้อมูล (Fetching Data)t
+คุณกำลังอยู่ที่ Branch **`chapter-07`** ซึ่งเน้นการทำ Cache
 
 ---
 
